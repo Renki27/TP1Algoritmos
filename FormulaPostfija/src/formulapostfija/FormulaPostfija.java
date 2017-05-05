@@ -20,11 +20,14 @@ public class FormulaPostfija {
     public static void main(String[] args) {
         // TODO code application logic here
         FormulaParser parser = new FormulaParser();
+         
         try {
-            parser.parse("[SQRTa+(-55)]");
+            parser.parse("[SQRTa+(-55)] *bc-d(FACTOH) +SQRTR");
         } catch (InvalidExpressionException ex) {
             Logger.getLogger(FormulaPostfija.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+       
         
     }
     

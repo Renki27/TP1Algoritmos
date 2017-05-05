@@ -14,9 +14,8 @@ import java.util.ArrayList;
 public class Expresion {
     
     char [] array = {'+','-','*','/',ExpressionChecker.SQRT_SIGN,ExpressionChecker.FACTO_SIGN,ExpressionChecker.TAN_SIGN,ExpressionChecker.COS_SIGN,ExpressionChecker.TAN_SIGN};
-    Operators o = new Operators();
-    AListStack a = new AListStack();
-    
+    Operations o = new Operations();
+
     public void expresion(){
     }
     

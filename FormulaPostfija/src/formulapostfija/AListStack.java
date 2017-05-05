@@ -8,6 +8,8 @@ package formulapostfija;
 import java.util.ArrayList;
 
 /**
+
+
  * Implementación de una Clase Stack para arreglos de tamaño indefinido.
  * @author Orlando Marín
  * @version 0.01
@@ -59,3 +61,4 @@ public class AListStack implements IStack {
         return str;
     }
 }
+

@@ -9,7 +9,7 @@ package formulapostfija;
  *
  * @author Orlando
  */
-public class Operators {
+public class Operations {
 
     public double sqrt(double element) {
 

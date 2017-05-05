@@ -10,7 +10,7 @@ package formulapostfija;
  * @author Orlando
  */
 public class FormulaParser {
-    
+
     
     
     public void parse(String formula) throws InvalidExpressionException {
@@ -18,15 +18,20 @@ public class FormulaParser {
         formula = ExpressionChecker.replaceParenthesis(formula);
         formula = ExpressionChecker.replaceBySigns(formula);
         formula = ExpressionChecker.replaceMinusByZeroMinusCase(formula);
+        formula = ExpressionChecker.operationFixer(formula);
+        ExpressionChecker.EnqueueProccessor(formula);
         // Checa si la fórmula está balanceada (correcta disposición de paréntesis).
-        if( ExpressionChecker.checkParenthesis(formula) &&
-                // Checa si hay paréntesis y letras juntas.
-                ExpressionChecker.checkLetters(formula) &&
-                // Checa si hay un - junto a otro signo.
-                ExpressionChecker.checkSigns(formula) ) {
-        }
+//        if( ExpressionChecker.checkParenthesis(formula) &&
+//                // Checa si hay paréntesis y letras juntas.
+//                ExpressionChecker.checkLetters(formula) &&
+//                // Checa si hay un - junto a otro signo.
+//                ExpressionChecker.checkSigns(formula) ) {
+//        }
         // Conseguir variables existentes
         System.out.println(formula); // TESTING
     }
+    
+    
+    
     
 }
