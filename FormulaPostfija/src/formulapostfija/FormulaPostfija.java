@@ -22,7 +22,7 @@ public class FormulaPostfija {
         FormulaParser parser = new FormulaParser();
          
         try {
-            parser.parse("[SQRTa+(-55)] *bc-d(FACTOH) +SQRTR");
+            parser.parse("[SQRTa+(-55)] *bc-d(FACTOH) +SQRTR)");
         } catch (InvalidExpressionException ex) {
             Logger.getLogger(FormulaPostfija.class.getName()).log(Level.SEVERE, null, ex);
         }
