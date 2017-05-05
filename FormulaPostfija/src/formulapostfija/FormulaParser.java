@@ -13,30 +13,25 @@ import javax.swing.JOptionPane;
  */
 public class FormulaParser {
 
+    ExpressionChecker expressionChecker = new ExpressionChecker();
+
     public void parse(String formula) throws InvalidExpressionException {
         // Reemplaza las operaciones por sus signos.
-        formula = ExpressionChecker.replaceParenthesis(formula);
-        formula = ExpressionChecker.replaceBySigns(formula);
-        formula = ExpressionChecker.replaceMinusByZeroMinusCase(formula);
+        formula = expressionChecker.replaceParenthesis(formula);
+        formula = expressionChecker.replaceBySigns(formula);
+        formula = expressionChecker.replaceMinusByZeroMinusCase(formula);
 
         // Checa si la fórmula está balanceada (correcta disposición de paréntesis).
-//        if( ExpressionChecker.checkParenthesis(formula) &&
-//                // Checa si hay paréntesis y letras juntas.
-//                ExpressionChecker.checkLetters(formula) &&
-//                // Checa si hay un - junto a otro signo.
-//                ExpressionChecker.checkSigns(formula) ) {
-//        }
-        if (ExpressionChecker.checkParenthesis(formula)) {
-            formula = ExpressionChecker.operationFixer(formula);
-            ExpressionChecker.EnqueueProccessor(formula);
-             System.out.println(formula);
-        }
-        else  {
-            JOptionPane.showMessageDialog(null, "Algunos patentesis en la formula estan erroneos, revise por favor", "Error", JOptionPane.ERROR_MESSAGE);
+        if (expressionChecker.checkParenthesis(formula)
+                && // Checa si hay paréntesis y letras juntas.
+                expressionChecker.checkLetters(formula)) {
+            formula = expressionChecker.operationFixer(formula);
+            expressionChecker.EnqueueProccessor(formula);
+         
+        } else {
+            JOptionPane.showMessageDialog(null, "Expresión inválida, contiene errores de sintaxis", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        // Conseguir variables existentes
-        // TESTING
     }
 
 }

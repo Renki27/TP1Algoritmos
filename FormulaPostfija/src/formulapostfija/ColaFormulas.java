@@ -14,8 +14,8 @@ public class ColaFormulas {
     private Nodo rear;
     private Nodo front;
 
-    public void enqueue(char character) {
-        Nodo nodo = new Nodo(character);
+    public void enqueue(String string) {
+        Nodo nodo = new Nodo(string);
         nodo.setSiguiente(null);
         if (isEmpty()) {
             front = nodo;
@@ -26,13 +26,13 @@ public class ColaFormulas {
         }
     }
 
-    public char dequeue() {
-        char character = '0';
+    public String dequeue() {
+        String string = "";
         if (!isEmpty()) {
-            character = front.getDato();
+            string = front.getDato();
             front = front.getSiguiente();
         }
-        return character;
+        return string;
     }
 
     public boolean isEmpty() {

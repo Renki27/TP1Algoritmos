@@ -9,6 +9,7 @@ import com.sun.xml.internal.ws.util.StringUtils;
 import static java.lang.System.in;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * Clase que se encarga de checar una hilera que representa una fórmula
@@ -25,11 +26,12 @@ public class ExpressionChecker {
     final static char SIN_SIGN = '´';
     final static char COS_SIGN = '`';
     final static char TAN_SIGN = '¨';
+    ColaFormulas originalFormulaQueue;
 
     public ExpressionChecker() {
     }
 
-    public static String replaceParenthesis(String formula) {
+    public String replaceParenthesis(String formula) {
         String result = formula;
         result = result.replaceAll("[\\[\\{]+", "(");
         result = result.replaceAll("[\\]\\}]+", ")");
@@ -37,7 +39,7 @@ public class ExpressionChecker {
         return result;
     }
 
-    public static String replaceBySigns(String formula) {
+    public String replaceBySigns(String formula) {
         String result = formula;
         result = result.replaceAll("(?i)SQRT", "" + SQRT_SIGN);
         result = result.replaceAll("(?i)FACTO", "" + FACTO_SIGN);
@@ -47,7 +49,7 @@ public class ExpressionChecker {
         return result;
     }
 
-    public static String replaceMinusByZeroMinusCase(String formula) {
+    public String replaceMinusByZeroMinusCase(String formula) {
         String result = formula;
         result = result.replaceAll("\\(-", "(0-");
         return result;
@@ -61,7 +63,7 @@ public class ExpressionChecker {
      * @param formula El string con la fórmula o expresión a checar.
      * @return true si la expresión está balanceada. false en caso cotrario.
      */
-    public static boolean checkParenthesis(String formula) {
+    public boolean checkParenthesis(String formula) {
         AListStack list = new AListStack();
         char[] charAry = formula.toCharArray();
         for (int i = 0; i < charAry.length; i++) {
@@ -86,7 +88,7 @@ public class ExpressionChecker {
         return list.isEmpty();
     }
 
-    public static boolean checkLetters(String formula) throws InvalidExpressionException {
+    public boolean checkLetters(String formula) throws InvalidExpressionException {
         if (formula.length() < 2) {
             return Character.isAlphabetic(formula.charAt(0));
         }
@@ -99,6 +101,7 @@ public class ExpressionChecker {
             if (thisIsAlpha == nextIsAlpha) {
                 if (thisIsAlpha == true) {
                     if (Character.isLetter(thisChar) || Character.isLetter(nextChar)) {
+                        JOptionPane.showMessageDialog(null, "Dos variables seguidas.", "Error", JOptionPane.ERROR_MESSAGE);
                         throw new InvalidExpressionException("ERROR: Dos variables seguidas.");
                     }
                 } else if (thisIsAlpha == false) {
@@ -106,16 +109,21 @@ public class ExpressionChecker {
                     //if(! doubleParenthesisCase ) {
                     if (thisChar != ')' && nextChar != '(') {
                         if (nextChar == '-') { // si el segundo signo es un -
+                            JOptionPane.showMessageDialog(null, "El operando '-' debe estar dentro de paréntesis.", "Error", JOptionPane.ERROR_MESSAGE);
                             throw new InvalidExpressionException("ERROR: El operando '-' debe estar dentro de paréntesis.");
                         } else {
+                            JOptionPane.showMessageDialog(null, "Expresión inválida, contiene errores de sintaxis", "Error", JOptionPane.ERROR_MESSAGE);
                             throw new InvalidExpressionException("ERROR: Expresión inválida, contiene errores de sintaxis.");
                         }
                     }
                     //} 
                 } else {
+                     JOptionPane.showMessageDialog(null, "Expresión inválida, contiene errores de sintaxis", "Error", JOptionPane.ERROR_MESSAGE);
                     throw new InvalidExpressionException("ERROR: Expresión inválida, contiene errores de sintaxis.");
+                    
                 }
             } else if (thisChar == ')' || nextChar == '(') {
+                 JOptionPane.showMessageDialog(null, "Variable junto a paréntesis, necesita operando.", "Error", JOptionPane.ERROR_MESSAGE);
                 throw new InvalidExpressionException("ERROR: Variable junto a paréntesis, necesita operando.");
             }
         }
@@ -126,7 +134,7 @@ public class ExpressionChecker {
         return true;
     }
 
-    public static String operationFixer(String formula) {
+    public String operationFixer(String formula) {
         formula = formula.toUpperCase();
         formula = formula.replace("√", " √ ");
         formula = formula.replace("!", " ! ");
@@ -148,8 +156,17 @@ public class ExpressionChecker {
         return formula;
     }
     
-    public static void EnqueueProccessor(String formula){
+    public void EnqueueProccessor(String formula){
         String[] array = formula.split("\\s+");
-        System.out.println(array);
+        originalFormulaQueue = new ColaFormulas();
+        for (String string : array) {
+            originalFormulaQueue.enqueue(string);
+        }
+        System.out.println(originalFormulaQueue.printQueue());
     }
+    
+    
+    
+    
+    
 }

@@ -11,18 +11,18 @@ package formulapostfija;
  */
 public class Nodo {
 
-    private char dato;
+    private String dato;
     Nodo siguiente;
 
-    public Nodo(char dato) {
+    public Nodo(String dato) {
         this.dato = dato;
     }
 
-    public char getDato() {
+    public String getDato() {
         return dato;
     }
 
-    public void setDato(char dato) {
+    public void setDato(String dato) {
         this.dato = dato;
     }
 

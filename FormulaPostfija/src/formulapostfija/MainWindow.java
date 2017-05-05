@@ -33,6 +33,7 @@ public class MainWindow extends javax.swing.JFrame {
         bt_salir = new javax.swing.JButton();
         bt_sqrt = new javax.swing.JButton();
         bt_facto = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventana Principal");
@@ -53,6 +54,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         bt_facto.setText("FACTO");
 
+        jButton1.setText("jButton1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -71,7 +74,9 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bt_sqrt)
                         .addGap(18, 18, 18)
-                        .addComponent(bt_facto)))
+                        .addComponent(bt_facto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -86,7 +91,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_sqrt)
-                    .addComponent(bt_facto))
+                    .addComponent(bt_facto)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                 .addComponent(bt_salir)
                 .addContainerGap())
@@ -140,6 +146,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton bt_facto;
     private javax.swing.JButton bt_salir;
     private javax.swing.JButton bt_sqrt;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lb_formula;
     private javax.swing.JTextField tf_formula;
     // End of variables declaration//GEN-END:variables

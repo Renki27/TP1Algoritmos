@@ -13,20 +13,20 @@ public class Pila {
 
     private Nodo ultimo = null;
 
-    public void insertar(char character) {
-        Nodo nodo = new Nodo(character);
+    public void insertar(String string) {
+        Nodo nodo = new Nodo(string);
         nodo.setSiguiente(ultimo);
         ultimo = nodo;
     }
 
-    public char retirar() {
-        char character = '0';
+    public String retirar() {
+        String string = "";
         if (!isEmpty()) {
-            character = ultimo.getDato();
+            string = ultimo.getDato();
             this.ultimo = ultimo.getSiguiente();
         }
 
-        return character;
+        return string;
     }
 
     public boolean isEmpty() {
