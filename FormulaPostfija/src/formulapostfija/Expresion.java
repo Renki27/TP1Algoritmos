@@ -18,10 +18,6 @@ public class Expresion {
     AListStack a = new AListStack();
     
     public void expresion(){
-    
-    
-    
-    
     }
     
     
