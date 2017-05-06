@@ -5,9 +5,6 @@
  */
 package formulapostfija;
 
-import com.sun.xml.internal.ws.util.StringUtils;
-import static java.lang.Character.isLetter;
-import static java.lang.System.in;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -98,7 +95,7 @@ public class ExpressionChecker {
         }
         char firstChar = formula.charAt(0);
         if(!Character.isLetter(firstChar) && !Character.isDigit(firstChar)) {
-            if(firstChar != SQRT_SIGN || firstChar != SIN_SIGN || firstChar != COS_SIGN || firstChar != TAN_SIGN) {
+            if(firstChar != '(' && firstChar != SQRT_SIGN && firstChar != SIN_SIGN && firstChar != COS_SIGN && firstChar != TAN_SIGN) {
                 throw new InvalidExpressionException("ERROR: Signo inválido al inicio de expresión.");
             }
         }
@@ -111,7 +108,6 @@ public class ExpressionChecker {
             if (thisIsAlpha == nextIsAlpha) {
                 if (thisIsAlpha == true) {
                     if (Character.isLetter(thisChar) || Character.isLetter(nextChar)) {
-                        JOptionPane.showMessageDialog(null, "Dos variables seguidas.", "Error", JOptionPane.ERROR_MESSAGE);
                         throw new InvalidExpressionException("ERROR: Dos variables seguidas.");
                     }
                 } else if (thisIsAlpha == false) {
@@ -119,21 +115,17 @@ public class ExpressionChecker {
                     //if(! doubleParenthesisCase ) {
                     if (thisChar != ')' && nextChar != '(') {
                         if (nextChar == '-') { // si el segundo signo es un -
-                            JOptionPane.showMessageDialog(null, "El operando '-' debe estar dentro de paréntesis.", "Error", JOptionPane.ERROR_MESSAGE);
                             throw new InvalidExpressionException("ERROR: El operando '-' debe estar dentro de paréntesis.");
                         } else if(nextChar != SQRT_SIGN && nextChar != SIN_SIGN && nextChar != COS_SIGN && nextChar != TAN_SIGN) {
-                            JOptionPane.showMessageDialog(null, "Expresión inválida, contiene errores de sintaxis", "Error", JOptionPane.ERROR_MESSAGE);
                             throw new InvalidExpressionException("ERROR: Expresión inválida, contiene errores de sintaxis.");
                         }
                     }
                     //} 
                 } else {
-                    JOptionPane.showMessageDialog(null, "Expresión inválida, contiene errores de sintaxis", "Error", JOptionPane.ERROR_MESSAGE);
                     throw new InvalidExpressionException("ERROR: Expresión inválida, contiene errores de sintaxis.");
 
                 }
             } else if (thisChar == ')' || nextChar == '(') {
-                JOptionPane.showMessageDialog(null, "Variable junto a paréntesis, necesita operando.", "Error", JOptionPane.ERROR_MESSAGE);
                 throw new InvalidExpressionException("ERROR: Variable junto a paréntesis, necesita operando.");
             }
         }

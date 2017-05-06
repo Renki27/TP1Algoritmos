@@ -137,7 +137,7 @@ public class MainWindow extends javax.swing.JFrame {
             try {
                 parser.parse(formula);
             } catch (InvalidExpressionException ex) {
-                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                this.showErrorDialog(ex);
             }
         }
         else{
@@ -150,6 +150,10 @@ public class MainWindow extends javax.swing.JFrame {
         tf_formula.setText("");
     }//GEN-LAST:event_bt_cleanActionPerformed
 
+    public void showErrorDialog(Exception e) {
+        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
     /**
      * @param args the command line arguments
      */

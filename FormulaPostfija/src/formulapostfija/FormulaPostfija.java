@@ -18,16 +18,15 @@ public class FormulaPostfija {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        /*// TODO code application logic here
         FormulaParser parser = new FormulaParser();
          
         try {
             parser.parse("-(A+B)*C-SQRT(4)-5");
         } catch (InvalidExpressionException ex) {
             Logger.getLogger(FormulaPostfija.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-       
+        }*/
+        MainWindow.main(args);
         
     }
     

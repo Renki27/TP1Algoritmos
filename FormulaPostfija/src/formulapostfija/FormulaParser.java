@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
  */
 public class FormulaParser {
 
-    ColaFormulas originalFormulaQueue = new ColaFormulas();
-    ExpressionChecker expressionChecker = new ExpressionChecker();
+    private ColaFormulas originalFormulaQueue = new ColaFormulas();
+    private ExpressionChecker expressionChecker = new ExpressionChecker();
 
     public void parse(String formula) throws InvalidExpressionException {
         // Reemplaza las operaciones por sus signos.
@@ -23,19 +23,11 @@ public class FormulaParser {
         formula = expressionChecker.replaceMinusByZeroMinusCase(formula);
 
         // Checa si la fórmula está balanceada (correcta disposición de paréntesis).
-        if (expressionChecker.checkParenthesis(formula)
-                && // Checa si hay paréntesis y letras juntas.
-                expressionChecker.checkLetters(formula)) {
-            formula = expressionChecker.operationFixer(formula);
-            originalFormulaQueue = expressionChecker.queueLoader(formula);
-            expressionChecker.colaFormulaPostfijaProcessor(originalFormulaQueue);
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Expresión inválida, contiene errores de sintaxis", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        expressionChecker.checkParenthesis(formula);
+        expressionChecker.checkLetters(formula);
+        formula = expressionChecker.operationFixer(formula);
+        originalFormulaQueue = expressionChecker.queueLoader(formula);
+        expressionChecker.colaFormulaPostfijaProcessor(originalFormulaQueue);
     }
     
-    
-    
-
 }
