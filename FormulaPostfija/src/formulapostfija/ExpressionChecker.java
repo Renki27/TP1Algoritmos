@@ -132,10 +132,6 @@ public class ExpressionChecker {
         return true;
     }
 
-    public static boolean checkSigns(String formula) {
-        return true;
-    }
-
     public String operationFixer(String formula) {
         formula = formula.toUpperCase();
         formula = formula.replace("√", " √ ");
@@ -169,27 +165,87 @@ public class ExpressionChecker {
             }
         }
         ColaFormulas originalFormulaQueue = new ColaFormulas();
+        originalFormulaQueue.enqueue("(");
         for (String string : array) {
             originalFormulaQueue.enqueue(string);
         }
+        originalFormulaQueue.enqueue(")");
         return originalFormulaQueue;
     }
+//(A+B)*C-SQRT(4)
 
- 
-    public void colaFormulaPostfijaProcessor(ColaFormulas originalFormulaQueue) {
+    public ColaFormulas colaFormulaPostfijaProcessor(ColaFormulas originalFormulaQueue) {
+        int size = originalFormulaQueue.getSize();
         ColaFormulas postfijaFormulaQueue = new ColaFormulas();
         Pila operatorsStack = new Pila();
-        for (int i = 0; i < originalFormulaQueue.getSize(); i++) {
-            String str = originalFormulaQueue.dequeue();
-            char temp = str.charAt(0);
-            if (Character.isDigit(temp)) {
-                postfijaFormulaQueue.enqueue(str);
+        try {
+
+            for (int i = 0; i < size; i++) {
+                String str = originalFormulaQueue.dequeue();
+                char temp = str.charAt(0);
+                switch (temp) {
+                    case '(':
+                        operatorsStack.insertar(str);
+                        break;
+                    case '+':
+                    case '-':
+                    case '*':
+                    case '/':
+                    case '^':
+                    case '√':
+                    case '!':
+                    case '´':
+                    case '`':
+                    case '¨':
+                        while ((!operatorsStack.isEmpty()) && (priorityChecker(temp) <= priorityChecker(operatorsStack.getUltimo().getDato().charAt(0)))) {
+                            postfijaFormulaQueue.enqueue(operatorsStack.retirar());
+                        }
+                        operatorsStack.insertar(str);
+
+                        break;
+                    case ')':
+                        while (operatorsStack.getUltimo().getDato().charAt(0) != '(') {
+                            postfijaFormulaQueue.enqueue(operatorsStack.retirar());
+                        }
+                        operatorsStack.retirar();
+                        break;
+                    default:
+                        postfijaFormulaQueue.enqueue(str);
+                }
+
             }
-            else {
-                operatorsStack.insertar(str);
-            }
+        } catch (Exception e) {
+            System.err.println("A sucedido algun error procesando la formula" + e.getMessage());
         }
 
+        return postfijaFormulaQueue;
+    }
+
+    public int priorityChecker(char operator) {
+        int priority = 0;
+        switch (operator) {
+            case '(':
+            case ')':
+                priority = 1;
+                break;
+            case '+':
+            case '-':
+                priority = 2;
+                break;
+            case '*':
+            case '/':
+                priority = 3;
+                break;
+            case '^':
+            case '√':
+            case '!':
+            case '´':
+            case '`':
+            case '¨':
+                priority = 4;
+                break;
+        }
+        return priority;
     }
 
 }

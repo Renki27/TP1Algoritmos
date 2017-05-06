@@ -13,6 +13,10 @@ public class Pila {
 
     private Nodo ultimo = null;
 
+    public Nodo getUltimo() {
+        return ultimo;
+    }
+    
     public void insertar(String string) {
         Nodo nodo = new Nodo(string);
         nodo.setSiguiente(ultimo);

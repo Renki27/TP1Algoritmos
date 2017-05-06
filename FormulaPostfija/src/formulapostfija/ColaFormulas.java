@@ -38,8 +38,8 @@ public class ColaFormulas {
         }
         return string;
     }
-    
-    public int getSize(){
+
+    public int getSize() {
         return this.size;
     }
 

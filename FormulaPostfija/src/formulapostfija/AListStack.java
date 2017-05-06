@@ -8,22 +8,24 @@ package formulapostfija;
 import java.util.ArrayList;
 
 /**
-
-
+ *
+ *
  * Implementación de una Clase Stack para arreglos de tamaño indefinido.
+ *
  * @author Orlando Marín
  * @version 0.01
  */
 public class AListStack implements IStack {
+
     private ArrayList<Integer> stack;
-    
+
     /**
      * Constructor para una pila de un tamaño máximo por defecto 10.
      */
     public AListStack() {
         this.stack = new ArrayList<Integer>();
     }
-    
+
     @Override
     public int size() {
         return this.stack.size();
@@ -36,8 +38,10 @@ public class AListStack implements IStack {
 
     @Override
     public int top() throws EmptyStackException {
-        if(this.isEmpty()) throw new EmptyStackException();
-        return this.stack.get(this.size()-1);
+        if (this.isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return this.stack.get(this.size() - 1);
     }
 
     @Override
@@ -48,17 +52,18 @@ public class AListStack implements IStack {
 
     @Override
     public int pop() throws EmptyStackException {
-        if(this.isEmpty()) throw new EmptyStackException();
-        return this.stack.remove(this.stack.size()-1);
+        if (this.isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return this.stack.remove(this.stack.size() - 1);
     }
-    
+
     @Override
     public String print() {
         String str = "";
-        for(int i = 0; i < this.size(); i++) {
+        for (int i = 0; i < this.size(); i++) {
             str += this.stack.get(i) + " ";
         }
         return str;
     }
 }
-

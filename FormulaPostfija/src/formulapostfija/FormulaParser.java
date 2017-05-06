@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 public class FormulaParser {
 
     ColaFormulas originalFormulaQueue = new ColaFormulas();
+    ColaFormulas postfijaFormulaQueue;
     ExpressionChecker expressionChecker = new ExpressionChecker();
 
     public void parse(String formula) throws InvalidExpressionException {
@@ -23,19 +24,21 @@ public class FormulaParser {
         formula = expressionChecker.replaceMinusByZeroMinusCase(formula);
 
         // Checa si la fórmula está balanceada (correcta disposición de paréntesis).
-        if (expressionChecker.checkParenthesis(formula)
-                && // Checa si hay paréntesis y letras juntas.
-                expressionChecker.checkLetters(formula)) {
+        if (expressionChecker.checkParenthesis(formula)) {
+//                && // Checa si hay paréntesis y letras juntas.
+//                expressionChecker.checkLetters(formula)) {
             formula = expressionChecker.operationFixer(formula);
             originalFormulaQueue = expressionChecker.queueLoader(formula);
-            expressionChecker.colaFormulaPostfijaProcessor(originalFormulaQueue);
+
+            
+            //Cola postfija
+            postfijaFormulaQueue = expressionChecker.colaFormulaPostfijaProcessor(originalFormulaQueue);
+
+            System.out.println(postfijaFormulaQueue.printQueue());
 
         } else {
             JOptionPane.showMessageDialog(null, "Expresión inválida, contiene errores de sintaxis", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    
-    
 
 }
