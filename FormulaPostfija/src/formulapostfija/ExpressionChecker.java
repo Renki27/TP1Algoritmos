@@ -54,6 +54,7 @@ public class ExpressionChecker {
     public String replaceMinusByZeroMinusCase(String formula) {
         String result = formula;
         result = result.replaceAll("\\(-", "(0-");
+        result = result.replaceAll("^-","0-");
         return result;
     }
 
@@ -92,7 +93,14 @@ public class ExpressionChecker {
 
     public boolean checkLetters(String formula) throws InvalidExpressionException {
         if (formula.length() < 2) {
-            return Character.isAlphabetic(formula.charAt(0));
+            char thisChar = formula.charAt(0);
+            if(!Character.isLetter(thisChar) && !Character.isDigit(thisChar)) throw new InvalidExpressionException("ERROR: Signo inválido al inicio de expresión.");
+        }
+        char firstChar = formula.charAt(0);
+        if(!Character.isLetter(firstChar) && !Character.isDigit(firstChar)) {
+            if(firstChar != SQRT_SIGN || firstChar != SIN_SIGN || firstChar != COS_SIGN || firstChar != TAN_SIGN) {
+                throw new InvalidExpressionException("ERROR: Signo inválido al inicio de expresión.");
+            }
         }
         for (int i = 1; i < formula.length() - 1; i++) {
             char thisChar = formula.charAt(i);
@@ -113,7 +121,7 @@ public class ExpressionChecker {
                         if (nextChar == '-') { // si el segundo signo es un -
                             JOptionPane.showMessageDialog(null, "El operando '-' debe estar dentro de paréntesis.", "Error", JOptionPane.ERROR_MESSAGE);
                             throw new InvalidExpressionException("ERROR: El operando '-' debe estar dentro de paréntesis.");
-                        } else {
+                        } else if(nextChar != SQRT_SIGN && nextChar != SIN_SIGN && nextChar != COS_SIGN && nextChar != TAN_SIGN) {
                             JOptionPane.showMessageDialog(null, "Expresión inválida, contiene errores de sintaxis", "Error", JOptionPane.ERROR_MESSAGE);
                             throw new InvalidExpressionException("ERROR: Expresión inválida, contiene errores de sintaxis.");
                         }

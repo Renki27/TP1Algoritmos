@@ -22,7 +22,7 @@ public class FormulaPostfija {
         FormulaParser parser = new FormulaParser();
          
         try {
-            parser.parse("[SQRTa+(-55)]");
+            parser.parse("-(A+B)*C-SQRT(4)-5");
         } catch (InvalidExpressionException ex) {
             Logger.getLogger(FormulaPostfija.class.getName()).log(Level.SEVERE, null, ex);
         }
