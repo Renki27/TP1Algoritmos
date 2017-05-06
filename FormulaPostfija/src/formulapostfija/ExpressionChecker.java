@@ -6,7 +6,9 @@
 package formulapostfija;
 
 import com.sun.xml.internal.ws.util.StringUtils;
+import static java.lang.Character.isLetter;
 import static java.lang.System.in;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -26,7 +28,7 @@ public class ExpressionChecker {
     final static char SIN_SIGN = '´';
     final static char COS_SIGN = '`';
     final static char TAN_SIGN = '¨';
-    ColaFormulas originalFormulaQueue;
+    private ArrayList<String> variables = new ArrayList<>();
 
     public ExpressionChecker() {
     }
@@ -118,12 +120,12 @@ public class ExpressionChecker {
                     }
                     //} 
                 } else {
-                     JOptionPane.showMessageDialog(null, "Expresión inválida, contiene errores de sintaxis", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Expresión inválida, contiene errores de sintaxis", "Error", JOptionPane.ERROR_MESSAGE);
                     throw new InvalidExpressionException("ERROR: Expresión inválida, contiene errores de sintaxis.");
-                    
+
                 }
             } else if (thisChar == ')' || nextChar == '(') {
-                 JOptionPane.showMessageDialog(null, "Variable junto a paréntesis, necesita operando.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Variable junto a paréntesis, necesita operando.", "Error", JOptionPane.ERROR_MESSAGE);
                 throw new InvalidExpressionException("ERROR: Variable junto a paréntesis, necesita operando.");
             }
         }
@@ -155,18 +157,39 @@ public class ExpressionChecker {
 
         return formula;
     }
-    
-    public void EnqueueProccessor(String formula){
+
+    public ColaFormulas queueLoader(String formula) {
         String[] array = formula.split("\\s+");
-        originalFormulaQueue = new ColaFormulas();
+        for (int i = 0; i < array.length; i++) {
+            String str = array[i];
+            char temp = str.charAt(0);
+            if (Character.isLetter(temp)) {
+                String value = JOptionPane.showInputDialog("Digite el valor de la variable " + temp);
+                array[i] = value;
+            }
+        }
+        ColaFormulas originalFormulaQueue = new ColaFormulas();
         for (String string : array) {
             originalFormulaQueue.enqueue(string);
         }
-        System.out.println(originalFormulaQueue.printQueue());
+        return originalFormulaQueue;
     }
-    
-    
-    
-    
-    
+
+ 
+    public void colaFormulaPostfijaProcessor(ColaFormulas originalFormulaQueue) {
+        ColaFormulas postfijaFormulaQueue = new ColaFormulas();
+        Pila operatorsStack = new Pila();
+        for (int i = 0; i < originalFormulaQueue.getSize(); i++) {
+            String str = originalFormulaQueue.dequeue();
+            char temp = str.charAt(0);
+            if (Character.isDigit(temp)) {
+                postfijaFormulaQueue.enqueue(str);
+            }
+            else {
+                operatorsStack.insertar(str);
+            }
+        }
+
+    }
+
 }

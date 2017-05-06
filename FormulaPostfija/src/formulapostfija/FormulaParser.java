@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class FormulaParser {
 
+    ColaFormulas originalFormulaQueue = new ColaFormulas();
     ExpressionChecker expressionChecker = new ExpressionChecker();
 
     public void parse(String formula) throws InvalidExpressionException {
@@ -26,12 +27,15 @@ public class FormulaParser {
                 && // Checa si hay paréntesis y letras juntas.
                 expressionChecker.checkLetters(formula)) {
             formula = expressionChecker.operationFixer(formula);
-            expressionChecker.EnqueueProccessor(formula);
-         
+            originalFormulaQueue = expressionChecker.queueLoader(formula);
+            expressionChecker.colaFormulaPostfijaProcessor(originalFormulaQueue);
+
         } else {
             JOptionPane.showMessageDialog(null, "Expresión inválida, contiene errores de sintaxis", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }
+    
+    
+    
 
 }
