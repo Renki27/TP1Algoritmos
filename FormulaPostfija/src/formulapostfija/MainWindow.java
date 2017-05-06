@@ -5,6 +5,10 @@
  */
 package formulapostfija;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author EJRH2
@@ -14,6 +18,8 @@ public class MainWindow extends javax.swing.JFrame {
     /**
      * Creates new form MainWindow
      */
+    FormulaParser parser = new FormulaParser();
+
     public MainWindow() {
         initComponents();
     }
@@ -33,15 +39,20 @@ public class MainWindow extends javax.swing.JFrame {
         bt_salir = new javax.swing.JButton();
         bt_sqrt = new javax.swing.JButton();
         bt_facto = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        bt_plus = new javax.swing.JButton();
+        bt_clean = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventana Principal");
-        setAlwaysOnTop(true);
 
         lb_formula.setText("Inserte la formula que desea evaluar:");
 
         bt_evaluar.setText("Evaluar");
+        bt_evaluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_evaluarActionPerformed(evt);
+            }
+        });
 
         bt_salir.setText("Salir");
         bt_salir.addActionListener(new java.awt.event.ActionListener() {
@@ -54,7 +65,14 @@ public class MainWindow extends javax.swing.JFrame {
 
         bt_facto.setText("FACTO");
 
-        jButton1.setText("jButton1");
+        bt_plus.setText("+");
+
+        bt_clean.setText("Limpiar");
+        bt_clean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cleanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -62,21 +80,22 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(bt_salir)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lb_formula)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(tf_formula, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bt_evaluar))))
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(bt_salir)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lb_formula)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(tf_formula, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(bt_evaluar)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(bt_sqrt)
                         .addGap(18, 18, 18)
                         .addComponent(bt_facto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(bt_plus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bt_clean)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -88,11 +107,16 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_formula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bt_evaluar))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_sqrt)
-                    .addComponent(bt_facto)
-                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bt_sqrt)
+                            .addComponent(bt_facto)
+                            .addComponent(bt_plus)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(bt_clean)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                 .addComponent(bt_salir)
                 .addContainerGap())
@@ -105,6 +129,26 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_bt_salirActionPerformed
+
+    private void bt_evaluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_evaluarActionPerformed
+        // TODO add your handling code here:
+        String formula = tf_formula.getText();
+        if (!formula.equals("")) {
+            try {
+                parser.parse(formula);
+            } catch (InvalidExpressionException ex) {
+                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "El campo no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_bt_evaluarActionPerformed
+
+    private void bt_cleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cleanActionPerformed
+        // TODO add your handling code here:
+        tf_formula.setText("");
+    }//GEN-LAST:event_bt_cleanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,11 +186,12 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_clean;
     private javax.swing.JButton bt_evaluar;
     private javax.swing.JButton bt_facto;
+    private javax.swing.JButton bt_plus;
     private javax.swing.JButton bt_salir;
     private javax.swing.JButton bt_sqrt;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lb_formula;
     private javax.swing.JTextField tf_formula;
     // End of variables declaration//GEN-END:variables
