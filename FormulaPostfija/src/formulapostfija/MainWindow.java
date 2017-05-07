@@ -5,6 +5,7 @@
  */
 package formulapostfija;
 
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -61,6 +62,18 @@ public class MainWindow extends javax.swing.JFrame {
         bt_8 = new javax.swing.JButton();
         bt_9 = new javax.swing.JButton();
         bt_backspace = new javax.swing.JButton();
+<<<<<<< HEAD
+=======
+        jPanel1 = new javax.swing.JPanel();
+        bt_f = new javax.swing.JButton();
+        bt_e = new javax.swing.JButton();
+        bt_d = new javax.swing.JButton();
+        bt_c = new javax.swing.JButton();
+        bt_b = new javax.swing.JButton();
+        bt_a = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textResult = new javax.swing.JTextArea();
+>>>>>>> fba6f0a1af576c4e6d8d1c1aadacba61db4a7b3a
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventana Principal");
@@ -249,6 +262,92 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
+=======
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+
+        bt_f.setText("F");
+        bt_f.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_fActionPerformed(evt);
+            }
+        });
+
+        bt_e.setText("E");
+        bt_e.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_eActionPerformed(evt);
+            }
+        });
+
+        bt_d.setText("D");
+        bt_d.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_dActionPerformed(evt);
+            }
+        });
+
+        bt_c.setText("C");
+        bt_c.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cActionPerformed(evt);
+            }
+        });
+
+        bt_b.setText("B");
+        bt_b.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_bActionPerformed(evt);
+            }
+        });
+
+        bt_a.setText("A");
+        bt_a.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_aActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bt_a)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bt_b)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bt_c)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bt_d)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bt_e)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bt_f)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_a)
+                    .addComponent(bt_b)
+                    .addComponent(bt_c)
+                    .addComponent(bt_d)
+                    .addComponent(bt_e)
+                    .addComponent(bt_f))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        textResult.setEditable(false);
+        textResult.setBackground(new java.awt.Color(204, 204, 204));
+        textResult.setColumns(20);
+        textResult.setRows(5);
+        jScrollPane1.setViewportView(textResult);
+
+>>>>>>> fba6f0a1af576c4e6d8d1c1aadacba61db4a7b3a
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -257,6 +356,12 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
+=======
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+>>>>>>> fba6f0a1af576c4e6d8d1c1aadacba61db4a7b3a
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(bt_sqrt, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -274,6 +379,14 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(bt_clean)
                             .addComponent(bt_evaluar))
                         .addContainerGap(13, Short.MAX_VALUE))
+<<<<<<< HEAD
+=======
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bt_salir)
+                        .addContainerGap())
+>>>>>>> fba6f0a1af576c4e6d8d1c1aadacba61db4a7b3a
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lb_formula)
@@ -314,15 +427,18 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(bt_9)))
                         .addGap(0, 0, Short.MAX_VALUE))))
+<<<<<<< HEAD
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bt_salir)
                 .addContainerGap())
+=======
+>>>>>>> fba6f0a1af576c4e6d8d1c1aadacba61db4a7b3a
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(5, 5, 5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lb_formula)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -360,9 +476,18 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(bt_7)
                     .addComponent(bt_8)
                     .addComponent(bt_9))
+<<<<<<< HEAD
                 .addGap(18, 18, 18)
                 .addComponent(bt_salir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_salir))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+>>>>>>> fba6f0a1af576c4e6d8d1c1aadacba61db4a7b3a
         );
 
         pack();
@@ -378,9 +503,11 @@ public class MainWindow extends javax.swing.JFrame {
         String formula = tf_formula.getText();
         if (!formula.equals("")) {
             try {
-                parser.parse(formula);
+                this.textResult.setForeground(Color.black);
+                this.textResult.setText( parser.parse(formula) );
             } catch (InvalidExpressionException ex) {
-                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                this.textResult.setForeground(Color.red);
+                this.textResult.setText(ex.getMessage());
             }
         } else {
             JOptionPane.showMessageDialog(null, "El campo no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
@@ -504,9 +631,41 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void bt_backspaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_backspaceActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
       tf_formula.setText (tf_formula.getText ().substring (0, tf_formula.getText ().length () - 1));
     }//GEN-LAST:event_bt_backspaceActionPerformed
 
+=======
+        if(tf_formula.getText().length() > 0) {
+            tf_formula.setText (tf_formula.getText ().substring (0, tf_formula.getText ().length () - 1));
+        }
+    }//GEN-LAST:event_bt_backspaceActionPerformed
+
+    private void bt_aActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_aActionPerformed
+        tf_formula.setText(tf_formula.getText() + "A");
+    }//GEN-LAST:event_bt_aActionPerformed
+
+    private void bt_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_bActionPerformed
+        tf_formula.setText(tf_formula.getText() + "B");
+    }//GEN-LAST:event_bt_bActionPerformed
+
+    private void bt_cActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cActionPerformed
+        tf_formula.setText(tf_formula.getText() + "C");
+    }//GEN-LAST:event_bt_cActionPerformed
+
+    private void bt_dActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_dActionPerformed
+        tf_formula.setText(tf_formula.getText() + "D");
+    }//GEN-LAST:event_bt_dActionPerformed
+
+    private void bt_eActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eActionPerformed
+        tf_formula.setText(tf_formula.getText() + "E");
+    }//GEN-LAST:event_bt_eActionPerformed
+
+    private void bt_fActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_fActionPerformed
+        tf_formula.setText(tf_formula.getText() + "F");
+    }//GEN-LAST:event_bt_fActionPerformed
+
+>>>>>>> fba6f0a1af576c4e6d8d1c1aadacba61db4a7b3a
     /**
      * @param args the command line arguments
      */
@@ -541,6 +700,10 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void showErrorDialog(Exception e) {
+        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_pRight;
@@ -554,11 +717,24 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton bt_7;
     private javax.swing.JButton bt_8;
     private javax.swing.JButton bt_9;
+<<<<<<< HEAD
     private javax.swing.JButton bt_backspace;
     private javax.swing.JButton bt_clean;
     private javax.swing.JButton bt_cos;
     private javax.swing.JButton bt_divide;
+=======
+    private javax.swing.JButton bt_a;
+    private javax.swing.JButton bt_b;
+    private javax.swing.JButton bt_backspace;
+    private javax.swing.JButton bt_c;
+    private javax.swing.JButton bt_clean;
+    private javax.swing.JButton bt_cos;
+    private javax.swing.JButton bt_d;
+    private javax.swing.JButton bt_divide;
+    private javax.swing.JButton bt_e;
+>>>>>>> fba6f0a1af576c4e6d8d1c1aadacba61db4a7b3a
     private javax.swing.JButton bt_evaluar;
+    private javax.swing.JButton bt_f;
     private javax.swing.JButton bt_facto;
     private javax.swing.JButton bt_minus;
     private javax.swing.JButton bt_multiply;
@@ -569,7 +745,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton bt_sin;
     private javax.swing.JButton bt_sqrt;
     private javax.swing.JButton bt_tan;
+<<<<<<< HEAD
+=======
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+>>>>>>> fba6f0a1af576c4e6d8d1c1aadacba61db4a7b3a
     private javax.swing.JLabel lb_formula;
+    private javax.swing.JTextArea textResult;
     private javax.swing.JTextField tf_formula;
     // End of variables declaration//GEN-END:variables
 }

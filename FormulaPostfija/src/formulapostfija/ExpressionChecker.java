@@ -28,6 +28,13 @@ public class ExpressionChecker {
     final static char SIN_SIGN = '´';
     final static char COS_SIGN = '`';
     final static char TAN_SIGN = '¨';
+    final static char POTENCIA_SIGN = '^';
+    final static String SQRT_STR = ""+SQRT_SIGN;
+    final static String FACTO_STR = ""+FACTO_SIGN;
+    final static String SIN_STR = ""+SIN_SIGN;
+    final static String COS_STR = ""+COS_SIGN;
+    final static String TAN_STR = ""+TAN_SIGN;
+    final static String POTENCIA_STR = ""+POTENCIA_SIGN;
     private ArrayList<String> variables = new ArrayList<>();
 
     public ExpressionChecker() {
@@ -54,6 +61,7 @@ public class ExpressionChecker {
     public String replaceMinusByZeroMinusCase(String formula) {
         String result = formula;
         result = result.replaceAll("\\(-", "(0-");
+        result = result.replaceAll("^-", "0-");
         return result;
     }
 
@@ -92,7 +100,14 @@ public class ExpressionChecker {
 
     public boolean checkLetters(String formula) throws InvalidExpressionException {
         if (formula.length() < 2) {
-            return Character.isAlphabetic(formula.charAt(0));
+            char thisChar = formula.charAt(0);
+            if(!Character.isLetter(thisChar) && !Character.isDigit(thisChar)) throw new InvalidExpressionException("ERROR: Signo inválido al inicio de expresión.");
+        }
+        char firstChar = formula.charAt(0);
+        if(!Character.isLetter(firstChar) && !Character.isDigit(firstChar)) {
+            if(firstChar != '(' && firstChar != SQRT_SIGN && firstChar != SIN_SIGN && firstChar != COS_SIGN && firstChar != TAN_SIGN) {
+                throw new InvalidExpressionException("ERROR: Signo inválido al inicio de expresión.");
+            }
         }
         for (int i = 1; i < formula.length() - 1; i++) {
             char thisChar = formula.charAt(i);
@@ -103,7 +118,6 @@ public class ExpressionChecker {
             if (thisIsAlpha == nextIsAlpha) {
                 if (thisIsAlpha == true) {
                     if (Character.isLetter(thisChar) || Character.isLetter(nextChar)) {
-                        JOptionPane.showMessageDialog(null, "Dos variables seguidas.", "Error", JOptionPane.ERROR_MESSAGE);
                         throw new InvalidExpressionException("ERROR: Dos variables seguidas.");
                     }
                 } else if (thisIsAlpha == false) {
@@ -111,21 +125,17 @@ public class ExpressionChecker {
                     //if(! doubleParenthesisCase ) {
                     if (thisChar != ')' && nextChar != '(') {
                         if (nextChar == '-') { // si el segundo signo es un -
-                            JOptionPane.showMessageDialog(null, "El operando '-' debe estar dentro de paréntesis.", "Error", JOptionPane.ERROR_MESSAGE);
                             throw new InvalidExpressionException("ERROR: El operando '-' debe estar dentro de paréntesis.");
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Expresión inválida, contiene errores de sintaxis", "Error", JOptionPane.ERROR_MESSAGE);
+                        } else if(nextChar != SQRT_SIGN && nextChar != SIN_SIGN && nextChar != COS_SIGN && nextChar != TAN_SIGN) {
                             throw new InvalidExpressionException("ERROR: Expresión inválida, contiene errores de sintaxis.");
                         }
                     }
                     //} 
                 } else {
-                    JOptionPane.showMessageDialog(null, "Expresión inválida, contiene errores de sintaxis", "Error", JOptionPane.ERROR_MESSAGE);
                     throw new InvalidExpressionException("ERROR: Expresión inválida, contiene errores de sintaxis.");
 
                 }
             } else if (thisChar == ')' || nextChar == '(') {
-                JOptionPane.showMessageDialog(null, "Variable junto a paréntesis, necesita operando.", "Error", JOptionPane.ERROR_MESSAGE);
                 throw new InvalidExpressionException("ERROR: Variable junto a paréntesis, necesita operando.");
             }
         }
@@ -133,21 +143,20 @@ public class ExpressionChecker {
     }
 
     public String operationFixer(String formula) {
+        
         formula = formula.toUpperCase();
-        formula = formula.replace("√", " √ ");
-        formula = formula.replace("!", " ! ");
-        formula = formula.replace("´", " ´ ");
-        formula = formula.replace("`", " ` ");
-        formula = formula.replace("¨", " ¨ ");
-        formula = formula.replace("¨", " ¨ ");
-        formula = formula.replace("¨", " ¨ ");
+        formula = formula.replace(SQRT_STR, " √ ");
+        formula = formula.replace(FACTO_STR, " ! ");
+        formula = formula.replace(COS_STR, " ´ ");
+        formula = formula.replace(SIN_STR, " ` ");
+        formula = formula.replace(TAN_STR, " ¨ ");
         formula = formula.replace("(", " ( ");
         formula = formula.replace(")", " ) ");
         formula = formula.replace("+", " + ");
         formula = formula.replace("-", " - ");
         formula = formula.replace("*", " * ");
         formula = formula.replace("/", " / ");
-        formula = formula.replace("^", " ^ ");
+        formula = formula.replace(POTENCIA_STR, " ^ ");
         formula = formula.replaceAll("[A-Z](?=.)", "$0 ");
         formula = formula.replaceAll("\\s{2,}", " ").trim();
 
@@ -191,12 +200,21 @@ public class ExpressionChecker {
                     case '-':
                     case '*':
                     case '/':
+<<<<<<< HEAD
                     case '^':
                     case '√':
                     case '!':
                     case '´':
                     case '`':
                     case '¨':
+=======
+                    case POTENCIA_SIGN:
+                    case SQRT_SIGN:
+                    case FACTO_SIGN:
+                    case COS_SIGN:
+                    case SIN_SIGN:
+                    case TAN_SIGN:
+>>>>>>> fba6f0a1af576c4e6d8d1c1aadacba61db4a7b3a
                         while ((!operatorsStack.isEmpty()) && (priorityChecker(temp) <= priorityChecker(operatorsStack.getUltimo().getDato().charAt(0)))) {
                             postfijaFormulaQueue.enqueue(operatorsStack.retirar());
                         }
@@ -236,12 +254,21 @@ public class ExpressionChecker {
             case '/':
                 priority = 3;
                 break;
+<<<<<<< HEAD
             case '^':
             case '√':
             case '!':
             case '´':
             case '`':
             case '¨':
+=======
+            case POTENCIA_SIGN:
+            case SQRT_SIGN:
+            case FACTO_SIGN:
+            case COS_SIGN:
+            case SIN_SIGN:
+            case TAN_SIGN:
+>>>>>>> fba6f0a1af576c4e6d8d1c1aadacba61db4a7b3a
                 priority = 4;
                 break;
         }

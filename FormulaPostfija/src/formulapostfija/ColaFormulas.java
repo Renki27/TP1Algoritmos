@@ -34,7 +34,7 @@ public class ColaFormulas {
         if (!isEmpty()) {
             string = front.getDato();
             front = front.getSiguiente();
-            size--;
+            
         }
         return string;
     }
