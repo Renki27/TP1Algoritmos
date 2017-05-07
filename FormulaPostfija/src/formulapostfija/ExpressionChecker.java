@@ -5,6 +5,9 @@
  */
 package formulapostfija;
 
+import com.sun.xml.internal.ws.util.StringUtils;
+import static java.lang.Character.isLetter;
+import static java.lang.System.in;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +28,13 @@ public class ExpressionChecker {
     final static char SIN_SIGN = '´';
     final static char COS_SIGN = '`';
     final static char TAN_SIGN = '¨';
+    final static char POTENCIA_SIGN = '^';
+    final static String SQRT_STR = ""+SQRT_SIGN;
+    final static String FACTO_STR = ""+FACTO_SIGN;
+    final static String SIN_STR = ""+SIN_SIGN;
+    final static String COS_STR = ""+COS_SIGN;
+    final static String TAN_STR = ""+TAN_SIGN;
+    final static String POTENCIA_STR = ""+POTENCIA_SIGN;
     private ArrayList<String> variables = new ArrayList<>();
 
     public ExpressionChecker() {
@@ -51,7 +61,7 @@ public class ExpressionChecker {
     public String replaceMinusByZeroMinusCase(String formula) {
         String result = formula;
         result = result.replaceAll("\\(-", "(0-");
-        result = result.replaceAll("^-","0-");
+        result = result.replaceAll("^-", "0-");
         return result;
     }
 
@@ -132,26 +142,21 @@ public class ExpressionChecker {
         return true;
     }
 
-    public static boolean checkSigns(String formula) {
-        return true;
-    }
-
     public String operationFixer(String formula) {
+        
         formula = formula.toUpperCase();
-        formula = formula.replace("√", " √ ");
-        formula = formula.replace("!", " ! ");
-        formula = formula.replace("´", " ´ ");
-        formula = formula.replace("`", " ` ");
-        formula = formula.replace("¨", " ¨ ");
-        formula = formula.replace("¨", " ¨ ");
-        formula = formula.replace("¨", " ¨ ");
+        formula = formula.replace(SQRT_STR, " √ ");
+        formula = formula.replace(FACTO_STR, " ! ");
+        formula = formula.replace(COS_STR, " ´ ");
+        formula = formula.replace(SIN_STR, " ` ");
+        formula = formula.replace(TAN_STR, " ¨ ");
         formula = formula.replace("(", " ( ");
         formula = formula.replace(")", " ) ");
         formula = formula.replace("+", " + ");
         formula = formula.replace("-", " - ");
         formula = formula.replace("*", " * ");
         formula = formula.replace("/", " / ");
-        formula = formula.replace("^", " ^ ");
+        formula = formula.replace(POTENCIA_STR, " ^ ");
         formula = formula.replaceAll("[A-Z](?=.)", "$0 ");
         formula = formula.replaceAll("\\s{2,}", " ").trim();
 
@@ -169,27 +174,87 @@ public class ExpressionChecker {
             }
         }
         ColaFormulas originalFormulaQueue = new ColaFormulas();
+        originalFormulaQueue.enqueue("(");
         for (String string : array) {
             originalFormulaQueue.enqueue(string);
         }
+        originalFormulaQueue.enqueue(")");
         return originalFormulaQueue;
     }
+//(A+B)*C-SQRT(4)
 
- 
-    public void colaFormulaPostfijaProcessor(ColaFormulas originalFormulaQueue) {
+    public ColaFormulas colaFormulaPostfijaProcessor(ColaFormulas originalFormulaQueue) {
+        int size = originalFormulaQueue.getSize();
         ColaFormulas postfijaFormulaQueue = new ColaFormulas();
         Pila operatorsStack = new Pila();
-        for (int i = 0; i < originalFormulaQueue.getSize(); i++) {
-            String str = originalFormulaQueue.dequeue();
-            char temp = str.charAt(0);
-            if (Character.isDigit(temp)) {
-                postfijaFormulaQueue.enqueue(str);
+        try {
+
+            for (int i = 0; i < size; i++) {
+                String str = originalFormulaQueue.dequeue();
+                char temp = str.charAt(0);
+                switch (temp) {
+                    case '(':
+                        operatorsStack.insertar(str);
+                        break;
+                    case '+':
+                    case '-':
+                    case '*':
+                    case '/':
+                    case POTENCIA_SIGN:
+                    case SQRT_SIGN:
+                    case FACTO_SIGN:
+                    case COS_SIGN:
+                    case SIN_SIGN:
+                    case TAN_SIGN:
+                        while ((!operatorsStack.isEmpty()) && (priorityChecker(temp) <= priorityChecker(operatorsStack.getUltimo().getDato().charAt(0)))) {
+                            postfijaFormulaQueue.enqueue(operatorsStack.retirar());
+                        }
+                        operatorsStack.insertar(str);
+
+                        break;
+                    case ')':
+                        while (operatorsStack.getUltimo().getDato().charAt(0) != '(') {
+                            postfijaFormulaQueue.enqueue(operatorsStack.retirar());
+                        }
+                        operatorsStack.retirar();
+                        break;
+                    default:
+                        postfijaFormulaQueue.enqueue(str);
+                }
+
             }
-            else {
-                operatorsStack.insertar(str);
-            }
+        } catch (Exception e) {
+            System.err.println("A sucedido algun error procesando la formula" + e.getMessage());
         }
 
+        return postfijaFormulaQueue;
+    }
+
+    public int priorityChecker(char operator) {
+        int priority = 0;
+        switch (operator) {
+            case '(':
+            case ')':
+                priority = 1;
+                break;
+            case '+':
+            case '-':
+                priority = 2;
+                break;
+            case '*':
+            case '/':
+                priority = 3;
+                break;
+            case POTENCIA_SIGN:
+            case SQRT_SIGN:
+            case FACTO_SIGN:
+            case COS_SIGN:
+            case SIN_SIGN:
+            case TAN_SIGN:
+                priority = 4;
+                break;
+        }
+        return priority;
     }
 
 }
